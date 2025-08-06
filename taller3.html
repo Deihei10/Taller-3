@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Delicious Bombai</title>
+  <style>
+    :root {
+      --nude-light: #fceee8;
+      --nude-main: #f6cfc3;
+      --nude-dark: #e7a391;
+      --accent: #c25d5d;
+      --text-color: #333;
+      --white: #ffffff;
+    }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background-color: var(--nude-light);
+      color: var(--text-color);
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    header {
+      background-color: var(--accent);
+      color: var(--white);
+      padding: 1rem;
+      font-size: 1.5rem;
+      font-weight: bold;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .menu-toggle {
+      display: none;
+      background: none;
+      border: none;
+      color: white;
+      font-size: 1.5rem;
+      cursor: pointer;
+    }
+
+    .dashboard {
+      display: flex;
+      flex: 1;
+    }
+
+    nav {
+      background-color: var(--nude-main);
+      min-width: 200px;
+      padding: 1rem;
+      transition: transform 0.3s ease;
+    }
+
+    nav ul {
+      list-style: none;
+    }
+
+    nav li {
+      margin-bottom: 1rem;
+    }
+    nav a {
+      text-decoration: none;
+      color: var(--text-color);
+      font-weight: bold;
+    }
+    main {
+      flex: 1;
+      padding: 1rem;
+    }
+    .cards {
+      display: grid;
+      gap: 1rem;
+    }
+    .card {
+      background-color: var(--white);
+      border-radius: 0.5rem;
+      padding: 1rem;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+    .users-table, .products-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 2rem;
+    }
+    .users-table th, .users-table td,
+    .products-table th, .products-table td {
+      padding: 0.75rem;
+      text-align: left;
+      border-bottom: 1px solid #ddd;
+    }
+    .users-table th,
+    .products-table th {
+      background-color: var(--nude-dark);
+      color: var(--white);
+    }
+    footer {
+      background-color: var(--nude-dark);
+      color: var(--white);
+      text-align: center;
+      padding: 1rem;
+    }
+    @media (min-width: 1024px) {
+      .cards {
+        grid-template-columns: repeat(4, 1fr);
+      }
+    }
+
+    @media (min-width: 768px) and (max-width: 1023px) {
+      .cards {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 767px) {
+      nav {
+        position: fixed;
+        top: 0;
+        right: 0;
+        height: 100%;
+        transform: translateX(100%);
+        z-index: 1000;
+        width: 200px;
+        box-shadow: -2px 0 5px rgba(0,0,0,0.1);
+      }
+
+      nav.show {
+        transform: translateX(0);
+      }
+
+      .menu-toggle {
+        display: block;
+      }
+
+      .dashboard {
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    Delicious Bombai
+    <button class="menu-toggle" id="menu-toggle">&#9776;</button>
+  </header>
+
+  <div class="dashboard">
+    <nav id="sidebar">
+      <ul>
+        <li><a href="#">Inicio</a></li>
+        <li><a href="#">Usuarios</a></li>
+        <li><a href="#">Productos</a></li>
+        <li><a href="#">Ventas</a></li>
+      </ul>
+    </nav>
+
+    <main>
+      <div class="cards">
+        <div class="card">Ventas hoy: $458.000 COP</div>
+        <div class="card">Clientes nuevos: 12</div>
+        <div class="card">Productos vendidos: 86</div>
+        <div class="card">Stock bajo: 5</div>
+      </div>
+
+      <h2>Usuarios</h2>
+      <table class="users-table">
+        <thead>
+          <tr>
+            <th>Nombre</th>
+            <th>Correo</th>
+            <th>Rol</th>
+            <th>Compras</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>Deivert Blanco</td><td>deivert.b@bombai.com</td><td>Cliente</td><td>$92.500 COP</td></tr>
+          <tr><td>Heidi Muñoz</td><td>heidi.m@bombai.com</td><td>Administrador</td><td>$0 COP</td></tr>
+          <tr><td>Jerson Oviedo</td><td>jerson.o@bombai.com</td><td>Cliente</td><td>$125.000 COP</td></tr>
+          <tr><td>Sandra Carvajal</td><td>sandra.c@bombai.com</td><td>Cliente</td><td>$49.800 COP</td></tr>
+          <tr><td>Carlos Peña</td><td>carlos.p@bombai.com</td><td>Cliente</td><td>$110.200 COP</td></tr>
+        </tbody>
+      </table>
+
+      <h2>Productos</h2>
+      <table class="products-table">
+        <thead>
+          <tr>
+            <th>Producto</th>
+            <th>Categoría</th>
+            <th>Precio</th>
+            <th>Disponibilidad</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>Tarta de Fresa</td><td>Postres</td><td>$18.500 COP</td><td>Disponible</td></tr>
+          <tr><td>Brownie</td><td>Repostería</td><td>$9.000 COP</td><td>Disponible</td></tr>
+          <tr><td>Cheesecake Maracuyá</td><td>Postres</td><td>$22.000 COP</td><td>Agotado</td></tr>
+          <tr><td>Galletas Artesanales</td><td>Snacks</td><td>$6.500 COP</td><td>Disponible</td></tr>
+          <tr><td>Rollitos de Canela</td><td>Repostería</td><td>$12.000 COP</td><td>Disponible</td></tr>
+        </tbody>
+      </table>
+    </main>
+  </div>
+
+  <footer>
+    &copy; 2025 Delicious Bombai - Todos los derechos reservados
+  </footer>
+  <script>
+    const toggleButton = document.getElementById('menu-toggle');
+    const sidebar = document.getElementById('sidebar');
+    toggleButton.addEventListener('click', () => {
+      sidebar.classList.toggle('show');
+    });
+    document.querySelectorAll('#sidebar a').forEach(link => {
+      link.addEventListener('click', () => {
+        if (window.innerWidth <= 767) {
+          sidebar.classList.remove('show');
+        }
+      });
+    });
+    window.addEventListener('load', () => {
+      if (window.innerWidth <= 767) {
+        sidebar.classList.remove('show');
+      }
+    });
+  </script>
+</body>
+</html>
